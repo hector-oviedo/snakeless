@@ -48,16 +48,22 @@ document.addEventListener('DOMContentLoaded', function() {
     window.leaderboardView = function() {
         console.log("trying to reach",window.GET_LEADERBOARD_URL);
         $.get(window.GET_LEADERBOARD_URL)
-            .done(function(leaderboardData) {
-                console.log("console.log(leaderboardData)",leaderboardData)
-                let tableRows = leaderboardData.map(entry => `
-                    <tr>
-                        <td>${entry.nickname.S}</td>
-                        <td>${entry.score.S}</td>
-                        <td>${entry.difficulty.S}</td>
-                        <td>${entry.date.S}</td>
-                    </tr>
-                `).join('');
+            .done(function(leaderboardDataRAW) {
+                console.log("leaderboardDataRAW",leaderboardDataRAW)
+                let leaderboardData = JSON.parse(leaderboardDataRAW);
+                
+                let tableRows = '';
+
+                leaderboardData.forEach(entry => {
+                    tableRows += ` 
+                        <tr>
+                            <td>${entry.nickname.S}</td>
+                            <td>${entry.score.S}</td>
+                            <td>${entry.difficulty.S}</td> 
+                            <td>${entry.date.S}</td>
+                        </tr>
+                    `; 
+                });
 
             const content = `
                 <div class="row col-10">
