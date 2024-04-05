@@ -30,7 +30,7 @@ async function handler(event) {
         console.error("Error pushing data to DynamoDB:", error);
         return {
             statusCode: 500,
-            body: "Error saving data"
+            body: "Error saving data: "+error
         };
     }
 }

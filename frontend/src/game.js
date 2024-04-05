@@ -128,60 +128,83 @@ class SnakeScene extends Phaser.Scene {
         this.add.text(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'Game Over\nScore: '+ this.score, { fontSize: '32px', fill: '#fff' }).setOrigin(0.5);
         this.handleGameOver(this.score, this.difficulty);
     }
+      
 
     handleGameOver(score, difficulty) {
         console.log("score:", score);
+
+        //generate date
+        let date = new Date();
+        let dateOptions = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        let timeOptions = { hour: '2-digit', minute: '2-digit' };
+        
+        let datePart = date.toLocaleDateString('en-US', dateOptions);
+        let timePart = date.toLocaleTimeString('en-US', timeOptions);
+        
+        let dateSTR = `${datePart} ${timePart}`;
 
         // Prepare data to send
         let postData = {
             nickname: window.nickname,
             score: score,
-            difficulty: difficulty
+            difficulty: difficulty,
+            date: dateSTR
         };
     
         // Perform the API call
         console.log("trying to reach",window.PUT_SCORE);
         $.post(window.PUT_SCORE, postData)
-        .done(function(response) {
-            // Handle response here
-            console.log("Data sent successfully", response);
-    
-            // After getting a response, show the leaderboard
-            setTimeout(() => {
-                window.leaderboardView();
-            }, 3000);
-        })
-        .fail(function(jqXHR, textStatus, errorThrown) {
-            // Log error to console for debugging
-            console.error("Error sending data:", textStatus, errorThrown, jqXHR.responseText);
+        $.ajax({
+            url: window.PUT_SCORE,
+            method: 'POST',
+            data: JSON.stringify(postData), // Encode as JSON
+            contentType: 'application/json', 
+            success: function(response) {
+                // Handle response here
+                console.log("Data sent successfully", response);
+        
+                // After getting a response, show the leaderboard
+                setTimeout(() => {                         
+                    window.leaderboardView();
+                }, 3000);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // Log error to console for debugging
+                console.error("Error sending data:", textStatus, errorThrown, jqXHR.responseText);
 
-            // Construct a more user-friendly error message
-            let errorMessage = "An error occurred. Please try again.";
+                // Construct a more user-friendly error message
+                let errorMessage = "An error occurred. Please try again.";
 
-            // Provide more detail if available and appropriate
-            if (textStatus === "timeout") {
-                errorMessage = "The request timed out. Please try again.";
-            } else if (textStatus === "error") {
-                // Check if the server provided a more specific error message
-                if (jqXHR.responseText) {
-                    try {
-                        let response = JSON.parse(jqXHR.responseText);
-                        if (response && response.message) {
-                            errorMessage = response.message; // Use server's error message
+                // Provide more detail if available and appropriate
+                if (textStatus === "timeout") {
+                    errorMessage = "The request timed out. Please try again.";
+                } else if (textStatus === "error") {
+                    // Check if the server provided a more specific error message
+                    if (jqXHR.responseText) {
+                        try {
+                            let response = JSON.parse(jqXHR.responseText);
+                            if (response && response.message) {
+                                errorMessage = response.message; // Use server's error message
+                            }
+                        } catch (e) {
+                            // If responseText isn't JSON, or doesn't contain a message, use a generic message
+                            errorMessage = "An unexpected error occurred. Please try again.";
                         }
-                    } catch (e) {
-                        // If responseText isn't JSON, or doesn't contain a message, use a generic message
-                        errorMessage = "An unexpected error occurred. Please try again.";
                     }
+                } else if (textStatus === "abort") {
+                    errorMessage = "The request was aborted. Please try again.";
+                } else if (textStatus === "parsererror") {
+                    errorMessage = "An error occurred while parsing the response. Please try again.";
                 }
-            } else if (textStatus === "abort") {
-                errorMessage = "The request was aborted. Please try again.";
-            } else if (textStatus === "parsererror") {
-                errorMessage = "An error occurred while parsing the response. Please try again.";
-            }
 
-            // Display the constructed error message to the user
-            alert(errorMessage);
+                // Display the constructed error message to the user
+                alert(errorMessage);
+
+                // After getting a response error, also show the leaderboard
+                setTimeout(() => {
+                    window.leaderboardView();
+                }, 3000);
+            }
         });
     }
 }

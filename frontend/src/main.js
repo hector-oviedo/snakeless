@@ -49,12 +49,13 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log("trying to reach",window.GET_LEADERBOARD_URL);
         $.get(window.GET_LEADERBOARD_URL)
             .done(function(leaderboardData) {
+                console.log("console.log(leaderboardData)",leaderboardData)
                 let tableRows = leaderboardData.map(entry => `
                     <tr>
-                        <td>${entry.nickname}</td>
-                        <td>${entry.score}</td>
-                        <td>${entry.difficulty}</td>
-                        <td>${entry.date}</td>
+                        <td>${entry.nickname.S}</td>
+                        <td>${entry.score.S}</td>
+                        <td>${entry.difficulty.S}</td>
+                        <td>${entry.date.S}</td>
                     </tr>
                 `).join('');
 
@@ -110,6 +111,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Display the constructed error message to the user
             alert(errorMessage);
+
+            //create the content
+            const content = `
+                <div class="row col-10">
+                    <div class="table-responsive" style="max-height: 50vh;min-width:100%">
+                        <table class="table table-dark sticky-header">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Nickname</th>
+                                    <th>Score</th>
+                                    <th>Difficulty</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-dark text-white">
+                                <tr>
+                                    <td>ERROR</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>`;
+
+            updateView('Snake Serverless - Leaderboard', content);
         });
     };
     // Initialize the welcome view
