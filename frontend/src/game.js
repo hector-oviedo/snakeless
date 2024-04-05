@@ -146,14 +146,13 @@ class SnakeScene extends Phaser.Scene {
         // Prepare data to send
         let postData = {
             nickname: window.nickname,
-            score: score,
+            score: parseInt(score).toString(),
             difficulty: difficulty,
             date: dateSTR
         };
     
         // Perform the API call
         console.log("trying to reach",window.PUT_SCORE);
-        $.post(window.PUT_SCORE, postData)
         $.ajax({
             url: window.PUT_SCORE,
             method: 'POST',
