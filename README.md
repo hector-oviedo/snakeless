@@ -45,6 +45,7 @@ The `terraform` directory has the project's entire IaC setup, which will be expl
 - `iam.tf`
 - `lambda.tf`
 - `apigateway.tf`
+- `outputs.tf`
 - `frontend_deployment.sh`<- (Experimental) Bash script for modify the singletone.js and upload the frontend to the S3.
 
 # Personal Experience
