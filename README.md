@@ -48,9 +48,6 @@ The `terraform` directory has the project's entire IaC setup, which will be expl
 - `outputs.tf`
 - `frontend_deployment.sh`<- (Experimental) Bash script for modify the singletone.js and upload the frontend to the S3.
 
-# Personal Experience
-Developing this infrastructure (or similar) requires extensive research, including forums like Stack Overflow (in my case), AI tools (Gemini & ChatGPT in my case), and official documentation from AWS and terraform, also youtube and just googling is also extremely useful for guidance.
-
 ## Challenges in IaC Development
 Developing this infrastructure was an extensive proccess that required a lot of research, including forums (Stack Overflow), assistance from AI tools (Gemini, ChatGPT), reading the official documentation (terraform and AWS), and video tutorials, despite these resources, there were moments when they seemed insufficient. Initially, I hadn't anticipated the complexity involved in setting up what seemed like a "straightforward" project. The idea was to showcase my capability to create a full cloud structure involving frontend, backend, and database components. But the reality was far my assumption. The manual setup on the AWS console was indeed straightforward: I created the S3 bucket, uploaded the frontend files, configured the CloudFront with its origin policies and behaviors, setted up the DynamoDB, and both Lambda functions, with "relative" ease. Everything worked eventually, including the IAM roles and API Gateway integrations.
 
