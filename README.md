@@ -1,7 +1,6 @@
 # Snakeless: Project for IU University
 
-## Project Subtitle
-Module: Cloud Computing Programming
+## Module: Cloud Computing Programming
 
 ## Description
 Snakeless is a project that includes a simple frontend with two backend Lambda functions and a basic DynamoDB table setup. Despite its apparent simplicity, the Terraform infrastructure illustrates the complexity and expandability of such a structure, especially in a game-like context with backend methods and a database. This documentation will first outline the project functionalities before going into the coding of Infrastructure as Code (IaC) and Terraform, detailing every file and process involved.
@@ -83,7 +82,7 @@ This script automates the process of updating the `frontend/singletone.js` confi
 
 * It Deploys the Frontend to S3: Synchronizes the contents of the `frontend/` directory to the specified S3 bucket, making the updated frontend accessible.
 
-## IMPORTANT NOTE!
+### IMPORTANT NOTE!
 Do not manually modify `frontend/singletone.js` if you intend to use this script for deployment. Manual changes might be overwrite the next time the script is executed, or might cause the script to malfunction (due to the PLACEHOLDER_ strings).
 
 ### Prerequisites:
@@ -92,7 +91,7 @@ Ensure the script is executable by running `chmod +x frontend_deployment.sh` in 
 Ensure Terraform has been successfully applied and the expected outputs are visible.
 Ensure the AWS CLI is configured with the necessary permissions to perform operations on S3.
 
-## Usage:
+### Usage:
 After successfully applying your Terraform configuration (`terraform apply`) and verifying the outputs, run the script from your terminal within the project `terraform` directory:
 
 `./frontend_deployment.sh`
