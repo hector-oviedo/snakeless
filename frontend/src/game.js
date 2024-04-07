@@ -160,15 +160,21 @@ class SnakeScene extends Phaser.Scene {
             contentType: 'application/json', 
             success: function(response) {
                 // Handle response here
-                console.log("Data sent successfully:", response);
+                console.log("Data sent successfully, result:", response);
+                
+                let msg;
+                if (response.error) msg = response.error;
+                if (response.message) msg = response.message;
+                if (!response.success) alert(msg)
         
                 // After getting a response, show the leaderboard
-                setTimeout(() => {                         
+                setTimeout(() => {
                     window.leaderboardView();
                 }, 3000);
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 // Display the constructed error message to the user
+                console.log(errorThrown)
                 alert(errorThrown);
 
                 // After getting a response error, also show the leaderboard

@@ -2,40 +2,34 @@ import { DynamoDB } from '@aws-sdk/client-dynamodb';
 
 const dynamoDB = new DynamoDB();  
 
-async function handler(event) { 
+async function handler(event) {
+    var headers = {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "OPTIONS,POST",
+        "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
+    };
+
     let data = null; 
 
     // Attempt JSON Parsing
     try {
       data = JSON.parse(event.body);
+
+      //for internal testing on AWS console use this
+      //data = event;
+
     } catch (error) {
       console.error("Error parsing JSON payload: ", error);
-  
-      // Fallback: Try Processing Raw String
-      try {
-        console.log("Trying to process raw event body");
-        data = event; // Attempt to use the entire event object
-      } catch (fallbackError) {
-        console.error("Error handling raw payload:", fallbackError);
-  
-        return {
-          statusCode: 500, 
-          body: JSON.stringify({
-            error: "Failed to process payload. Please contact support." 
-          })
-        };
-      } 
+      return {
+        statusCode: 500, 
+        headers: headers,
+        body: JSON.stringify({
+            "success": false,
+            "error": "Failed to process payload. Please contact support." 
+        })
+      };
     }
-
-    //check payload
-    if (!event.body) { 
-        return {
-          statusCode: 200,
-          body: JSON.stringify({
-            error: "Payload is missing" 
-          })
-        };
-      }
 
     // Validation: Specific Error Messages
     const missingParams = [];
@@ -47,16 +41,23 @@ async function handler(event) {
     if (missingParams.length > 0) {
     return {
         statusCode: 400,
+        headers: headers,
         body: JSON.stringify({
-        error: `Missing required parameters: ${missingParams.join(', ')}`,
-        bodyReceived: data   
+            "success":false,
+            "error": `Missing required parameters: ${missingParams.join(', ')}`,
+            "bodyReceived": data
         })
     };
     }
+    
+    const timestamp = new Date().getTime();
+    const randomValue = Math.floor(Math.random() * 1000);
+    const ID = `${timestamp}-${randomValue}`;
 
     const params = {
         TableName: process.env.DYNAMODB_TABLE,
         Item: {
+            'ID': { S: ID },
             'nickname': { S: data.nickname }, 
             'score': { S: String(data.score) },
             'difficulty': { S: data.difficulty },
@@ -73,13 +74,21 @@ async function handler(event) {
 
         return {
             statusCode: 200,
-            body: "Data pushed successfully"
+            headers: headers,
+            body: JSON.stringify({
+                "success":true,
+                "message":"Data pushed successfully"
+            })
         };
     } catch (error) {
         console.error("Error pushing data to DynamoDB:", error);
         return {
             statusCode: 500,
-            body: "Error saving data: "+error
+            headers: headers,
+            body: JSON.stringify({
+                "success":false,
+                "message":"Error saving data: " + error
+            })
         };
     }
 }

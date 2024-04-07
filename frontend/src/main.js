@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
         $.get(window.GET_LEADERBOARD_URL)
             .done(function(leaderboardDataRAW) {
                 console.log("leaderboardDataRAW",leaderboardDataRAW)
-                let leaderboardData = JSON.parse(leaderboardDataRAW);
+                let leaderboardData = leaderboardDataRAW;
                 
                 let tableRows = '';
 

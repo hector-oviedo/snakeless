@@ -4,6 +4,12 @@ const dynamoDB = new DynamoDB();
 const tableName = process.env.DYNAMODB_TABLE;
 
 async function handler(event) {
+    var headers = {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "OPTIONS,GET",
+        "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
+    };
     try {
         const params = {
             TableName: tableName,
@@ -20,10 +26,18 @@ async function handler(event) {
 
         items.sort((a, b) => b.score - a.score); 
 
-        return { statusCode: 200, body: JSON.stringify(items) }; 
+        return {
+            statusCode: 200,
+            headers: headers,
+            body: JSON.stringify(items)
+        }; 
     } catch (error) {
         console.error("Error retrieving leaderboard:", error);
-        return { statusCode: 500, body: JSON.stringify({ error: "Could not retrieve leaderboard" }) };
+        return {
+            statusCode: 500,
+            headers: headers,
+            body: JSON.stringify({"success":false, "error": "Could not retrieve leaderboard" })
+        };
     }
 }
 
