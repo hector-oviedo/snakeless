@@ -48,16 +48,16 @@ The `terraform` directory has the project's entire IaC setup, which will be expl
 - `apigateway.tf`
 - `frontend_deployment.sh`<- (Experimental) Bash script for modify the singletone.js and upload the frontend to the S3.
 
-# How-To
+# Personal Experience
 Developing this infrastructure (or similar) requires extensive research, including forums like Stack Overflow (in my case), AI tools (Gemini & ChatGPT in my case), and official documentation from AWS and terraform, also youtube and just googling is also extremely useful for guidance.
 
-#### Challenges in IaC Development
+## Challenges in IaC Development
 Developing this infrastructure was an extensive proccess that required a lot of research, including forums (Stack Overflow), assistance from AI tools (Gemini, ChatGPT), reading the official documentation (terraform and AWS), and video tutorials, despite these resources, there were moments when they seemed insufficient. Initially, I hadn't anticipated the complexity involved in setting up what seemed like a "straightforward" project. The idea was to showcase my capability to create a full cloud structure involving frontend, backend, and database components. But the reality was far my assumption. The manual setup on the AWS console was indeed straightforward: I created the S3 bucket, uploaded the frontend files, configured the CloudFront with its origin policies and behaviors, setted up the DynamoDB, and both Lambda functions, with "relative" ease. Everything worked eventually, including the IAM roles and API Gateway integrations.
 
-#### The Terraform Challenge
+## The Terraform Challenge
 The challenge began when I attempted to translate this manual AWS console UI setup into a Terraform blueprint... The process was anything but easy. The first issue was simply as just as uploading the Lambda functions and dealing with specific AWS provider versions. For instance, I encountered errors when trying to use Node.js 20.x, as the error messages suggested support only up to version 14.x. This issue required me to explicitly set the provider version in `main.tf`. Each step that was previously a simple click became a formidable challenge. Configuring permissions, roles, API Gateway: ESPECIALLY Api Gateway, setting up CORS policies turned the project into a tedious endeavor. The iterative process of `terraform apply`, `destroy`, and `plan` again, was not just a command sequence but a test of patience, with each cycle taking up to 10 minutes and teasing my endurance.
 
-#### CORS
+# CORS!
 Configuring the API Gateway (`apigateway.tf`). A task simple and straightforward in the AWS console, became a complex "Swiss watch" in Terraform. I fixed one thing, another exploded. The frontend served via CloudFront, encountered CORS errors when attempting to communicate with the API Gateway. This problem forced me to apply a solution I'm generally not "happy" to implement: Directly modifying the Lambda functions to include CORS headers in the code. A step "outside" of the best practices, intertwining infrastructure configuration with application logic, but was necessary under the circumstances.
 
 #### Reflections on Perseverance
