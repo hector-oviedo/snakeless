@@ -87,8 +87,9 @@ Upload manually the `frontend` files into the S3 bucket created.
 
 # Known Issues & Improvements
 
+
 #### Security
-The current setup exposes a security risk, particularly with the `submitScore` function, which could be exploited to submit scores from outside the app (cloudfront) source. A potential solution could be restricting origin access and implementing rate timing limiting, but this requires additional frontend logic and was out of scope (i think?) for this project.
+The current setup exposes a security risk, particularly with the `submitScore` function, which could be exploited to submit scores from outside the app (CloudFront CDN website) source. A potential solution could be restricting origin access and implementing rate timing limiting, but this requires additional frontend logic and was out of scope (i think?) for this project.
 
 #### API Gateway should be a Load Balancer
 While using API Gateway simplifies development, for production a Load Balancer is recommended for better scalability.
