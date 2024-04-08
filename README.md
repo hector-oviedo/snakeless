@@ -5,7 +5,7 @@
 ## Description
 Snakeless is a project that includes a simple frontend with two backend Lambda functions and a basic DynamoDB table setup. Despite its apparent simplicity, the Terraform infrastructure illustrates the complexity and expandability of such a structure, especially in a game-like context with backend methods and a database. This documentation will first outline the project functionalities before going into the coding of Infrastructure as Code (IaC) and Terraform, detailing every process involved.
 
-### Frontend
+### Frontend inside `frontend`
 The frontend is a straightforward serverless CDN serving a static HTML content. This approach, utilizing vanilla JavaScript and HTML, avoids the complexities of application services, the content then is hosted on a S3 storage and delivered via CloudFront as a CDN. The frontend also includes/calls public CDN libraries such as jQuery 3.7.1, Font Awesome 6.5.1, Bootstrap 5.3.3, and Phaser 3.80.1. The game inside the frontend (developed with Phaser) features three difficulty levels. When the user finish the game, it posts the score to an API endpoint and subsequently fetches a leaderboard, including the best players scores.
 
 #### Frontend Structure inside `frontend` directory
