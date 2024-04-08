@@ -53,7 +53,7 @@ The lack of a CI/CD pipeline means certain manual steps, here we have 2 differen
 
 ## Solution 1
 
-#### BASH Script: terraform/frontend_deployment.sh
+#### BASH Script: `terraform/frontend_deployment.sh`
 This script automates the process of updating the `frontend/singletone.js` configuration file and deploys the frontend to the S3 bucket created once the `terraform apply` exposed the required outputs.
 
 ### Prerequisites:
@@ -66,7 +66,7 @@ Ensure the AWS CLI is configured with the necessary permissions to perform opera
 
 * It Updates `frontend/singletone.js`: Dynamically replaces placeholders in the `frontend/singletone.js` file with actual values for the API Gateway ID, AWS region, and deployment stage obtained from Terraform outputs.
 
-* It Deploys the Frontend to S3: Synchronizes the contents of the `frontend/` directory to the specified S3 bucket, making the updated frontend accessible.
+* It Deploys the Frontend to S3: Synchronizes the contents of the `frontend` directory to the specified S3 bucket, making the updated frontend accessible.
 
 ### IMPORTANT NOTE
 Do not manually modify `frontend/singletone.js` if you intend to use this script for deployment. Manual changes might be overwrite the next time the script is executed, or might cause the script to malfunction (due to the PLACEHOLDER_ strings). Have in count also once you used the script, your local copy of the singletone.js will contain important information about your API Gateway (ID, region, stage).
