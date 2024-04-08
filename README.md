@@ -39,13 +39,13 @@ The `terraform` directory has the project's entire IaC setup. Inside each file o
 #### Terraform Structure
 - `main.tf`
 - `variables.tf`
+- `outputs.tf`
 - `dynamodb.tf`
 - `s3.tf`
 - `cloudfront.tf`
 - `iam.tf`
 - `lambda.tf`
 - `apigateway.tf`
-- `outputs.tf`
 - `frontend_deployment.sh`<- (Experimental) Bash script for modify the singletone.js and upload the frontend to the S3.
 
 #### Pipeline
