@@ -46,7 +46,7 @@ The `terraform` directory has the project's entire IaC setup. Inside each file o
 - `iam.tf`
 - `lambda.tf`
 - `apigateway.tf`
-- `frontend_deployment.sh`<- (Experimental) Bash script for modify the singletone.js and upload the frontend to the S3.
+- `frontend_deployment.sh`<- Bash script for modify the singletone.js and upload the frontend to the S3.
 
 #### Pipeline
 The lack of a CI/CD pipeline means certain manual steps, here we have 2 different solutions:
