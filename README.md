@@ -51,7 +51,7 @@ The `terraform` directory has the project's entire IaC setup. Inside each file o
 #### Pipeline
 The lack of a CI/CD pipeline means certain manual steps, here we have 2 different solutions:
 
-## Solution 1
+## Solution #1
 
 #### BASH Script: `terraform/frontend_deployment.sh`
 This script automates the process of updating the `frontend/singletone.js` configuration file and deploys the frontend to the S3 bucket created once the `terraform apply` exposed the required outputs.
@@ -78,7 +78,7 @@ After successfully applying your Terraform configuration (`terraform apply`) and
 
 This will update your singletone.js with the latest configuration based on Terraform outputs and synchronize your frontend assets with the specified S3 bucket.
 
-## Solution 2
+## Solution #2
 
 Manually modify the `frontend/singletone.js` file setting up the variables window.API_ID, window.API_REGION, window.API_STAGE with your API Gateway data.
 Upload manually the `frontend` files into the S3 bucket created.
