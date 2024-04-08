@@ -64,7 +64,7 @@ Ensure the AWS CLI is configured with the necessary permissions to perform opera
 
 ### What the BASH Script do
 
-* It Updates `frontend/singletone.js`: Dynamically replaces placeholders in the `frontend/singletone.js` file with actual values for the API Gateway ID, AWS region, and deployment stage obtained from Terraform outputs.
+* It Updates `frontend/singletone.js`: Dynamically replacing placeholders in the `frontend/singletone.js` file with actual values for the API Gateway (ID, AWS region, and deployment stage) obtained from Terraform outputs.
 
 * It Deploys the Frontend to S3: Synchronizes the contents of the `frontend` directory to the specified S3 bucket, making the updated frontend accessible.
 
