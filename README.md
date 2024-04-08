@@ -25,7 +25,7 @@ A POST Lambda function accepting a JSON payload with `nickname`, `score`, `diffi
 #### `getLeaderboard` Function
 A GET function that returns the top 50 scores in an array. Errors return a status false and additional information.
 
-#### Lambda Security Note
+#### Lambda Headers Security Note
 Both functions currently accept requests from all origins, which poses a security concern that will be addressed in the Terraform section.
 
 ### IaC & Terraform
