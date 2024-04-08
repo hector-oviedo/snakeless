@@ -8,7 +8,7 @@ Snakeless is a project that includes a simple frontend with two backend Lambda f
 ### Frontend
 The frontend is a straightforward serverless CDN serving a static HTML content. This approach, utilizing vanilla JavaScript and HTML, avoids the complexities of application services, the content then is hosted on a S3 storage and delivered via CloudFront as a CDN. The frontend also includes/calls public CDN libraries such as jQuery 3.7.1, Font Awesome 6.5.1, Bootstrap 5.3.3, and Phaser 3.80.1. The game inside the frontend (developed with Phaser) features three difficulty levels. When the user finish the game, it posts the score to an API endpoint and subsequently fetches a leaderboard, including the best players scores.
 
-#### Frontend Structure
+#### Frontend Structure inside `frontend` directory
 - `index.html`: Main entry point.
 - `error.html`: Error page.
 - `singletone.js`: Stores API endpoint information, *a key file*.
