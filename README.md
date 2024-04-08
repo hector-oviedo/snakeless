@@ -76,7 +76,8 @@ After successfully applying your Terraform configuration (`terraform apply`) and
 
 `./frontend_deployment.sh`
 
-This will update your singletone.js with the latest configuration based on Terraform outputs and synchronize your frontend assets with the specified S3 bucket.
+### Verify the Bash Script:
+This will update your `frontend/singletone.js` with the latest configuration based on Terraform outputs and synchronize your frontend assets with the specified S3 bucket. Check if the file `frontend/singletone.js` contains the correct information, and check if the files of the frontend are present in the S3 storage, or simply navigate to your CloudFront CDN.
 
 ## Solution #2
 
