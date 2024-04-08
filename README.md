@@ -16,7 +16,7 @@ The frontend is a straightforward serverless CDN serving a static HTML content. 
 - `src/game.js`: Core game functionality, and includes the API call to submit scores.
 - `src/main.js`: Handles APP navigation, sections, and leaderboard fetching, also global variables.
 
-### Backend
+### Backend inside `backend/functions`
 The backend consists of two Lambda functions in Node.js 20.x, requiring DynamoDB for storage. Permissions required are: to `submitScore` write access to the DynamoDB table and to `getLeaderboard`  read access to the DynamoDB table.
 
 #### `submitScore` Function
