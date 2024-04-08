@@ -69,7 +69,7 @@ Ensure the AWS CLI is configured with the necessary permissions to perform opera
 * It Deploys the Frontend to S3: Synchronizes the contents of the `frontend` directory to the specified S3 bucket.
 
 ### IMPORTANT NOTE
-Do not manually modify `frontend/singletone.js` if you intend to use this script for deployment. Manual changes might be overwrite the next time the script is executed, or might cause the script to malfunction (due to the PLACEHOLDER_ strings). Have in count also once you used the script, your local copy of the singletone.js will contain important information about your API Gateway (ID, region, stage).
+Do not manually modify `frontend/singletone.js` if you intend to use this script for deployment. Manual changes might cause the script to malfunction (due to the PLACEHOLDER_ strings needed to the script replace them with the terraform outputs). Have in count also once you used the script, your local copy of the singletone.js will contain important information about your API Gateway (ID, region, stage).
 
 ### Usage:
 After successfully applying your Terraform configuration (`terraform apply`) and verifying the outputs, run the script from your terminal within the project `terraform` directory:
