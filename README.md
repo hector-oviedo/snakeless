@@ -62,7 +62,7 @@ Ensure the script is executable by running `chmod +x frontend_deployment.sh` in 
 Ensure Terraform has been successfully applied and the expected outputs are visible.
 Ensure the AWS CLI is configured with the necessary permissions to perform operations on S3.
 
-### What the BASH Sacript do
+### What the BASH Script do
 
 * It Updates `frontend/singletone.js`: Dynamically replaces placeholders in the `frontend/singletone.js` file with actual values for the API Gateway ID, AWS region, and deployment stage obtained from Terraform outputs.
 
