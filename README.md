@@ -1,6 +1,6 @@
 # Snakeless: Project for IU University
 
-## Module: Cloud Computing Programming
+## Module: Cloud Programming
 
 ## Description
 Snakeless is a project that includes a simple frontend with two backend Lambda functions and a basic DynamoDB table setup. Despite its apparent simplicity, the Terraform infrastructure illustrates the complexity and expandability of such a structure, especially in a game-like context with backend methods and a database. This documentation will first outline the project functionalities before going into the coding of Infrastructure as Code (IaC) and Terraform, detailing every file and process involved.
