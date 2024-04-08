@@ -83,10 +83,17 @@ This will update your singletone.js with the latest configuration based on Terra
 Manually modify the `frontend/singletone.js` file setting up the variables window.API_ID, window.API_REGION, window.API_STAGE with your API Gateway data.
 Upload manually the `frontend` files into the S3 bucket created.
 
-### Known Issues
+
+# Known Issues & Improvements
 
 #### Security
 The current setup exposes a security risk, particularly with the `submitScore` function, which could be exploited to submit scores from outside the app (cloudfront) source. A potential solution could be restricting origin access and implementing rate timing limiting, but this requires additional frontend logic and was out of scope (i think?) for this project.
+
+#### API Gateway should be a Load Balancer
+While using API Gateway simplifies development, for production a Load Balancer is recommended for better scalability.
+
+#### CI/CD Pipeline
+While using a BASH script avoid manual editing and updating, a pipeline is recommended as well.
 
 ## Challenges in IaC Development
 
